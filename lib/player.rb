@@ -8,9 +8,5 @@ class Player
         @symbol = symbol
     end
 
-    def play 
-        
-    end
-
 end
 

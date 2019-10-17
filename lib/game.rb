@@ -9,15 +9,19 @@ class Game
     @board_game = Board.new
   end
 
-  def play
-    puts "Choisir une position :"
-    input = gets.chomp.to_s
-    if hash_board.has_key?(input) && hash_board.has_value?(" ")
-       
-
-      
-
-    end 
+  def play(player)
+      puts "#{player.name}, please choose a boardcase:"
+      choice = gets.chomp
+      if @board_game.hash_board.has_key?(choice)
+        if @board_game.hash_board.has_value?(" ")
+           @board_game.hash_board[move] = player.symbol
+        endç
+      end
+      while !(@board_game.hash_board.has_key?(move)) || @board_game.hash_board[move] != " "
+        puts "You need to choose a valid/existing boardcase!"
+        move = gets.chomp.to_s
+      end
+    end
   end
   def turn
     #TO DO : méthode faisant appelle aux méthodes des autres classes (notamment à l'instance de Board). Elle affiche le plateau, demande au joueur ce qu'il joue, vérifie si un joueur a gagné, passe au joueur suivant si la partie n'est pas finie.
@@ -31,4 +35,28 @@ class Game
     # TO DO : permet l'affichage de fin de partie quand un vainqueur est détecté ou si il y a match nul
   end 
   
+  def victory?
+    #victory player1
+    if @board_game.hash_board[:a1] == @player1.symbol && @board_game.hash_board[:b1] == @player1.symbol && @board_game.hash_board[:c1] == @player1.symbol ||
+      @board_game.hash_board[:a2] == @player1.symbol && @board_game.hash_board[:b2] == @player1.symbol && @board_game.hash_board[:c2] == @player1.symbol ||
+      @board_game.hash_board[:a3] == @player1.symbol && @board_game.hash_board[:b3] == @player1.symbol && @board_game.hash_board[:c3] == @player1.symbol ||
+      @board_game.hash_board[:a1] == @player1.symbol && @board_game.hash_board[:a2] == @player1.symbol && @board_game.hash_board[:a3] == @player1.symbol ||
+      @board_game.hash_board[:b1] == @player1.symbol && @board_game.hash_board[:b2] == @player1.symbol && @board_game.hash_board[:b3] == @player1.symbol ||
+      @board_game.hash_board[:c1] == @player1.symbol && @board_game.hash_board[:c2] == @player1.symbol && @board_game.hash_board[:c3] == @player1.symbol ||
+      @board_game.hash_board[:a1] == @player1.symbol && @board_game.hash_board[:b2] == @player1.symbol && @board_game.hash_board[:c3] == @player1.symbol ||
+      @board_game.hash_board[:c1] == @player1.symbol && @board_game.hash_board[:b2] == @player1.symbol && @board_game.hash_board[:a3] == @player1.symbol 
+      return @player1
+    #victory player2
+    elsif @board_game.hash_board[:a1] == @player2.symbol && @board_game.hash_board[:b1] == @player2.symbol && @board_game.hash_board[:c1] == @player2.symbol ||
+      @board_game.hash_board[:a2] == @player2.symbol && @board_game.hash_board[:b2] == @player2.symbol && @board_game.hash_board[:c2] == @player2.symbol ||
+      @board_game.hash_board[:a3] == @player2.symbol && @board_game.hash_board[:b3] == @player2.symbol && @board_game.hash_board[:c3] == @player2.symbol ||
+      @board_game.hash_board[:a1] == @player2.symbol && @board_game.hash_board[:a2] == @player2.symbol && @board_game.hash_board[:a3] == @player2.symbol ||
+      @board_game.hash_board[:b1] == @player2.symbol && @board_game.hash_board[:b2] == @player2.symbol && @board_game.hash_board[:b3] == @player2.symbol ||
+      @board_game.hash_board[:c1] == @player2.symbol && @board_game.hash_board[:c2] == @player2.symbol && @board_game.hash_board[:c3] == @player2.symbol ||
+      @board_game.hash_board[:a1] == @player2.symbol && @board_game.hash_board[:b2] == @player2.symbol && @board_game.hash_board[:c3] == @player2.symbol ||
+      @board_game.hash_board[:c1] == @player2.symbol && @board_game.hash_board[:b2] == @player2.symbol && @board_game.hash_board[:a3] == @player2.symbol 
+      return @player2
+    else
+      return false    
+    end
 end

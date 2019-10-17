@@ -10,10 +10,11 @@ require 'board'
 #require 'application'
 
 def perform
-    #player1 = Player.new("X")
-    #player2 = Player.new("O")
     game1 = Game.new
     game1.board_game.display_board
+    board1 = Board.new
+    game1.play
+
 end
 
 perform
